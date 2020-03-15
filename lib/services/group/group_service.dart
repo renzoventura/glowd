@@ -1,6 +1,6 @@
 import 'package:chopper/chopper.dart';
 import 'package:lyghts/global.dart';
-import 'package:lyghts/light_controller/models/group/group.dart';
+import 'package:lyghts/models/group/group.dart';
 import 'package:lyghts/utils/json_converter.dart';
 
 part 'group_service.chopper.dart';

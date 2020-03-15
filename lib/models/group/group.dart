@@ -1,5 +1,8 @@
-import 'package:lyghts/light_controller/models/group/action.dart';
-import 'package:lyghts/light_controller/models/group/state.dart';
+
+
+import 'package:lyghts/models/group/action.dart';
+import 'package:lyghts/models/group/state.dart';
+
 
 class Group {
   String name;

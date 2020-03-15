@@ -4,7 +4,7 @@ class Action {
   int hue;
   int sat;
   String effect;
-  // List<double> xy;
+  List<dynamic> xy;
   int ct;
   String alert;
   String colormode;
@@ -15,7 +15,7 @@ class Action {
     this.hue,
     this.sat,
     this.effect,
-    // this.xy,
+    this.xy,
     this.ct,
     this.alert,
     this.colormode,
@@ -27,7 +27,7 @@ class Action {
     hue = json['hue'];
     sat = json['sat'];
     effect = json['effect'];
-    // xy = json['xy'];
+    xy = json['xy'];
     ct = json['ct'];
     alert = json['alert'];
     colormode = json['colormode'];
@@ -40,7 +40,7 @@ class Action {
     data['hue'] = this.hue;
     data['sat'] = this.sat;
     data['effect'] = this.effect;
-    // data['xy'] = this.xy;
+    data['xy'] = this.xy;
     data['ct'] = this.ct;
     data['alert'] = this.alert;
     data['colormode'] = this.colormode;

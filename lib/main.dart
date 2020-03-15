@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lyghts/light_controller/view_models/group_view_model.dart';
-import 'package:lyghts/light_controller/view_models/light_view_model.dart';
-import 'package:lyghts/light_controller/views/groups_screen.dart';
-import 'package:lyghts/light_controller/views/lights_screen.dart';
+import 'package:lyghts/screens/groups/view_model/group_view_model.dart';
+import 'package:lyghts/screens/lights/view_model/light_view_model.dart';
+import 'package:lyghts/screens/groups/views/groups_screen.dart';
+import 'package:lyghts/screens/lights/views/lights_screen.dart';
 import 'package:lyghts/utils/dependency_assembly.dart';
 import 'package:provider/provider.dart';
 

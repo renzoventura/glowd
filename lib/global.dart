@@ -1,2 +1,2 @@
-const api_key = 'yourkey';
-const server = 'server';
+const api_key = '';
+const server = '';
