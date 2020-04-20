@@ -11,3 +11,12 @@ const String ERROR = "Error";
 const String CLOSE = "Close";
 const String REFRESH_TO_LOAD = "Refresh to load Rooms";
 const String PULL_TO_REFRESH = "Pull to refresh";
+
+
+const String LIGHT = "Light";
+const String LIGHT_CONTROLLER = "Light Controller";
+const String BRIGHTNESS = "Brightness";
+
+const String R = "R";
+const String G = "G";
+const String B = "B";

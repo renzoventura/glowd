@@ -1,8 +1,5 @@
-
-
 import 'package:lyghts/models/group/action.dart';
 import 'package:lyghts/models/group/state.dart';
-
 
 class Group {
   String name;

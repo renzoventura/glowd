@@ -22,7 +22,6 @@ class JsonToTypeConverter extends JsonConverter {
           .map((item) => jsonParser(item as Map<String, dynamic>) as InnerType)
           .toList() as T;
     }
-    print("List Of Groups");
     return jsonParser(jsonMap);
   }
 }
