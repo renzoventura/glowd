@@ -64,16 +64,7 @@ class _GroupsScreenState extends State<GroupsScreen> {
       setState(() {});
     }
 
-    navigateToLightsScreen(List<dynamic> listOfLights) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LightsScreen(
-            lights: listOfLights,
-          ),
-        ),
-      );
-    }
+    navigateToLightsScreen() => Navigator.pushNamed(context, LightsScreen.id);
 
     return Consumer2<GroupViewModel, LightViewModel>(builder: (
       context,

@@ -1,10 +1,10 @@
 import 'package:chopper/chopper.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:lyghts/models/light/light.dart';
 import 'package:lyghts/models/request_body/state_dto.dart';
 import 'package:lyghts/services/light/light_service.dart';
 import 'package:lyghts/utils/BaseViewModel.dart';
 import 'package:lyghts/utils/dependency_assembly.dart';
+import 'package:lyghts/extentions/double_extention.dart';
 
 class LightViewModel extends BaseViewModel {
   LightService lightService = dependencyAssembler<LightService>();
@@ -18,14 +18,13 @@ class LightViewModel extends BaseViewModel {
   //unfortunately flutter is single threaded so we cannot call multiple calls
   //at the same time :(
   getLightsByGroup(List<dynamic> lightIds,
-      {Function(List<Light>) onSuccessNavigate, Function onFail}) async {
+      {Function onSuccessNavigate, Function onFail}) async {
     setBusy();
     currentLights.clear();
     currentLightIds.clear();
     currentLightIds = lightIds;
 
     bool hasSentAllSuccessfully = true;
-    List<Light> lights = [];
     try {
       for (String id in lightIds) {
         Response resp = await lightService.getLightById(int.parse(id));
@@ -34,12 +33,12 @@ class LightViewModel extends BaseViewModel {
         } else {
           Light newLight = Light.fromJson(resp.body);
           newLight.setId(int.parse(id));
-          lights.add(Light.fromJson(resp.body));
-          currentLights.add(Light.fromJson(resp.body));
+          print(newLight.id);
+          currentLights.add(newLight);
         }
       }
       if (hasSentAllSuccessfully) {
-        if (onSuccessNavigate != null) onSuccessNavigate(lights);
+        if (onSuccessNavigate != null) onSuccessNavigate();
         setIdle();
       } else {
         if (onFail != null) onFail();
@@ -54,12 +53,18 @@ class LightViewModel extends BaseViewModel {
   updateLight(Light light) async {
     setBusy();
     try {
+      print(light.id);
       StateDTO state = StateDTO(on: light.state.on, bri: light.state.bri);
-      if (light.state.xy != null) state.setXY(light.state.xy);
-      Response resp =
-          await lightService.updateLightById(light.id, state.toJson());
+      if (light.state.xy != null)
+        state.setXY(light.state.xy.map((f) => f.roundToTwoDecimal()).toList());
+      print(state.toJson().toString());
+      Response resp = await lightService.updateLightById(
+        light.id,
+        state.toJson(),
+      );
       if (resp.isSuccessful) {
-        getLightsByGroup(currentLightIds);
+        print(resp.body.toString());
+//        getLightsByGroup(currentLightIds);
       } else {}
     } catch (e) {}
     setBusy();

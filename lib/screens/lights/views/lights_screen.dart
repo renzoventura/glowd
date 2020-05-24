@@ -11,10 +11,6 @@ import 'package:provider/provider.dart';
 class LightsScreen extends StatefulWidget {
   static const id = "lights";
 
-  final List<Light.Light> lights;
-
-  LightsScreen({this.lights});
-
   @override
   _LightsScreenState createState() => _LightsScreenState();
 }
@@ -24,22 +20,15 @@ class _LightsScreenState extends State<LightsScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-    changeSelected(int i) {
-      currentSelected = i;
-      setState(() {});
-    }
     return Consumer<LightViewModel>(builder: (context, viewModel, child) {
-//      double x;
-//      double y;
-//      if (widget.lights[currentSelected].state.xy != null) {
-//        x = widget.lights[currentSelected].state.xy[0];
-//        y = widget.lights[currentSelected].state.xy[1];
-//      }
+      changeSelected(int i) {
+        currentSelected = i;
+        setState(() {});
+      }
 
-      return SafeArea(
-        child: Scaffold(
-          body: Column(
+      getLights() {
+        if (viewModel.currentLights.isNotEmpty) {
+          return Column(
             children: <Widget>[
               Column(
                 children: <Widget>[
@@ -47,24 +36,21 @@ class _LightsScreenState extends State<LightsScreen> {
                     child: Text("Lights Screen"),
                   ),
                   InkWell(
-                    onTap: () {
-                      viewModel.updateLight(widget.lights[currentSelected]);
-                    },
+                    onTap: () => viewModel
+                        .updateLight(viewModel.currentLights[currentSelected]),
                     child: Text("UPDATE!"),
                   ),
                   ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
-                    itemCount: widget.lights.length,
+                    itemCount: viewModel.currentLights.length,
                     itemBuilder: (BuildContext context, int index) {
                       return InkWell(
-                        onTap: () {
-                          changeSelected(index);
-                        },
+                        onTap: () => changeSelected(index),
                         child: HighlightWidget(
                           isSelected: currentSelected == index,
                           child: LightWidget(
-                            light: widget.lights[index],
+                            light: viewModel.currentLights[index],
                           ),
                         ),
                       );
@@ -76,24 +62,33 @@ class _LightsScreenState extends State<LightsScreen> {
                 child: SizedBox(
                   width: double.infinity,
                   child: LightController(
-                    light: widget.lights[currentSelected],
+                    light: viewModel.currentLights[currentSelected],
                     rgb: HueToRgb.xyBriToRgb(
-                      widget.lights[currentSelected].state.bri,
-                      widget.lights[currentSelected].state.xy != null
-                          ? widget.lights[currentSelected].state.xy[0]
+                      viewModel.currentLights[currentSelected].state.bri,
+                      viewModel.currentLights[currentSelected].state.xy != null
+                          ? viewModel.currentLights[currentSelected].state.xy[0]
                           : null,
-                      widget.lights[currentSelected].state.xy != null
-                          ? widget.lights[currentSelected].state.xy[1]
+                      viewModel.currentLights[currentSelected].state.xy != null
+                          ? viewModel.currentLights[currentSelected].state.xy[1]
                           : null,
                     ),
                   ),
                 ),
               ),
             ],
-          ),
+          );
+        } else {
+          return Center(
+            child: Text("No Lights"),
+          );
+        }
+      }
+
+      return SafeArea(
+        child: Scaffold(
+          body: getLights(),
         ),
       );
     });
-
   }
 }
