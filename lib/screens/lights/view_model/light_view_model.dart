@@ -10,6 +10,7 @@ class LightViewModel extends BaseViewModel {
   LightService lightService = dependencyAssembler<LightService>();
   List<dynamic> currentLightIds = [];
   List<Light> currentLights = [];
+  int currentSelected = 0;
 
   //Q: why all these light api request?!
   //A: Group api does not return each light's current status
@@ -20,8 +21,9 @@ class LightViewModel extends BaseViewModel {
   getLightsByGroup(List<dynamic> lightIds,
       {Function onSuccessNavigate, Function onFail}) async {
     setBusy();
-    currentLights.clear();
-    currentLightIds.clear();
+    currentSelected = 0;
+    currentLights = [];
+    currentLightIds = [];
     currentLightIds = lightIds;
 
     bool hasSentAllSuccessfully = true;
@@ -33,7 +35,6 @@ class LightViewModel extends BaseViewModel {
         } else {
           Light newLight = Light.fromJson(resp.body);
           newLight.setId(int.parse(id));
-          print(newLight.id);
           currentLights.add(newLight);
         }
       }
@@ -55,7 +56,7 @@ class LightViewModel extends BaseViewModel {
     try {
       print(light.id);
       StateDTO state = StateDTO(on: light.state.on, bri: light.state.bri);
-      if (light.state.xy != null)
+      if (light.state.xy != null && light.state.xy.isNotEmpty)
         state.setXY(light.state.xy.map((f) => f.roundToTwoDecimal()).toList());
       print(state.toJson().toString());
       Response resp = await lightService.updateLightById(
@@ -68,5 +69,9 @@ class LightViewModel extends BaseViewModel {
       } else {}
     } catch (e) {}
     setBusy();
+  }
+
+  changeSelected(int i) {
+    currentSelected = i;
   }
 }

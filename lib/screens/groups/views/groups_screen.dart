@@ -80,8 +80,11 @@ class _GroupsScreenState extends State<GroupsScreen> {
       }
 
       void navigateToLightsPage(List<dynamic> lightIds) {
-        lightViewModel.getLightsByGroup(lightIds,
-            onFail: onFailGetGroups, onSuccessNavigate: navigateToLightsScreen);
+        lightViewModel.getLightsByGroup(
+          lightIds,
+          onFail: onFailGetGroups,
+          onSuccessNavigate: navigateToLightsScreen,
+        );
       }
 
       return SafeArea(

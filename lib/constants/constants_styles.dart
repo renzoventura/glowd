@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 const double smallPadding = 8;
 const double mediumPadding = 12;
 const double largePadding = 16;
+const double largeXPadding = 40;
 
+const double smallBorderWidth = 1;
 const double borderWidth = 3;
 const double largeFontSize = 20;
 
@@ -15,6 +17,17 @@ const GROUPS_TITLE_TEXT_STYLE = TextStyle(
 const HEADER_TEXT_STYLE = TextStyle(
   fontSize: 10,
 );
+
+const SCREEN_TITLE = TextStyle(
+  fontSize: 30,
+);
+
+
+const UPDATE_TEXT = TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.w400,
+);
+
 
 
 final curvedEdgesDecoration = BoxDecoration(

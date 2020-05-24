@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lyghts/models/light/light.dart' as Light;
+import 'package:lyghts/constants/constants_labels.dart';
+import 'package:lyghts/constants/constants_styles.dart';
 import 'package:lyghts/screens/lights/components/highlight_widget.dart';
 import 'package:lyghts/screens/lights/components/light_controller.dart';
 import 'package:lyghts/screens/lights/components/light_widget.dart';
@@ -16,13 +17,11 @@ class LightsScreen extends StatefulWidget {
 }
 
 class _LightsScreenState extends State<LightsScreen> {
-  int currentSelected = 0;
-
   @override
   Widget build(BuildContext context) {
     return Consumer<LightViewModel>(builder: (context, viewModel, child) {
       changeSelected(int i) {
-        currentSelected = i;
+        viewModel.changeSelected(i);
         setState(() {});
       }
 
@@ -31,15 +30,20 @@ class _LightsScreenState extends State<LightsScreen> {
           return Column(
             children: <Widget>[
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Center(
-                    child: Text("Lights Screen"),
+                  Padding(
+                    padding: const EdgeInsets.all(mediumPadding),
+                    child: Text(
+                      LIGHT_SCREEN,
+                      style: SCREEN_TITLE,
+                    ),
                   ),
-                  InkWell(
-                    onTap: () => viewModel
-                        .updateLight(viewModel.currentLights[currentSelected]),
-                    child: Text("UPDATE!"),
-                  ),
+//                  InkWell(
+//                    onTap: () => viewModel.updateLight(
+//                        viewModel.currentLights[viewModel.currentSelected]),
+//                    child: Text("UPDATE!"),
+//                  ),
                   ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
@@ -48,7 +52,7 @@ class _LightsScreenState extends State<LightsScreen> {
                       return InkWell(
                         onTap: () => changeSelected(index),
                         child: HighlightWidget(
-                          isSelected: currentSelected == index,
+                          isSelected: viewModel.currentSelected == index,
                           child: LightWidget(
                             light: viewModel.currentLights[index],
                           ),
@@ -62,16 +66,25 @@ class _LightsScreenState extends State<LightsScreen> {
                 child: SizedBox(
                   width: double.infinity,
                   child: LightController(
-                    light: viewModel.currentLights[currentSelected],
+                    light: viewModel.currentLights[viewModel.currentSelected],
                     rgb: HueToRgb.xyBriToRgb(
-                      viewModel.currentLights[currentSelected].state.bri,
-                      viewModel.currentLights[currentSelected].state.xy != null
-                          ? viewModel.currentLights[currentSelected].state.xy[0]
+                      viewModel
+                          .currentLights[viewModel.currentSelected].state.bri,
+                      viewModel.currentLights[viewModel.currentSelected].state
+                                  .xy !=
+                              null
+                          ? viewModel.currentLights[viewModel.currentSelected]
+                              .state.xy[0]
                           : null,
-                      viewModel.currentLights[currentSelected].state.xy != null
-                          ? viewModel.currentLights[currentSelected].state.xy[1]
+                      viewModel.currentLights[viewModel.currentSelected].state
+                                  .xy !=
+                              null
+                          ? viewModel.currentLights[viewModel.currentSelected]
+                              .state.xy[1]
                           : null,
                     ),
+                    onTap: () => viewModel.updateLight(
+                        viewModel.currentLights[viewModel.currentSelected]),
                   ),
                 ),
               ),

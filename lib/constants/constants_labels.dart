@@ -17,3 +17,5 @@ const String BRIGHTNESS = "Brightness";
 const String R = "R";
 const String G = "G";
 const String B = "B";
+const String LIGHT_SCREEN = "Lights Screen";
+const String UPDATE = "UPDATE";

@@ -12,7 +12,8 @@ import 'package:provider/provider.dart';
 class LightController extends StatefulWidget {
   final Light.Light light;
   final RGB rgb;
-  LightController({@required this.light, this.rgb});
+  final Function onTap;
+  LightController({@required this.light, this.rgb, @required this.onTap});
 
   @override
   _LightControllerState createState() => _LightControllerState();
@@ -68,7 +69,6 @@ class _LightControllerState extends State<LightController> {
           });
         },
         textColor: textColor,
-
       ));
       sliders.add(
         SliderTitle(
@@ -106,11 +106,40 @@ class _LightControllerState extends State<LightController> {
       ),
       padding: EdgeInsets.all(mediumPadding),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: sliders,
+              ),
+            ),
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: InkWell(
+              onTap: widget.onTap,
+              child: Container(
+                margin: const EdgeInsets.all(mediumPadding),
+                padding: const EdgeInsets.symmetric(
+                  vertical: mediumPadding,
+                ),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: textColor,
+                    width: smallBorderWidth,
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30.0),
+                  ),
+                ),
+                child: Text(
+                  UPDATE,
+                  style: UPDATE_TEXT.copyWith(
+                    color: textColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
           ),
