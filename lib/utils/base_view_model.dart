@@ -12,5 +12,4 @@ class BaseViewModel extends ChangeNotifier {
     isBusy = false;
     notifyListeners();
   }
-
 }

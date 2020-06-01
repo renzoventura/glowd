@@ -1,4 +1,3 @@
-
 import 'dart:math';
 
 extension Precision on double {

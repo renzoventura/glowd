@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lyghts/components/custom_safe_area.dart';
 import 'package:lyghts/components/spin_widget.dart';
 import 'package:lyghts/constants/constants_labels.dart';
 import 'package:lyghts/constants/constants_styles.dart';
@@ -87,61 +88,67 @@ class _GroupsScreenState extends State<GroupsScreen> {
         );
       }
 
-      return SafeArea(
-        child: Scaffold(
-          body: SmartRefresher(
-            enablePullUp: true,
-            onRefresh: _onRefresh,
-            child: ModalProgressHUD(
-              inAsyncCall: groupViewModel.isBusy,
-              progressIndicator: SpinWidget(),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(smallPadding),
-                  child: Column(
-                    children: <Widget>[
-                      HomeBarWidget(),
-                      Visibility(
-                        visible: groupViewModel.listOfGroups.isNotEmpty,
-                        replacement: Padding(
-                          padding: const EdgeInsets.all(smallPadding),
-                          child: Text(
-                            replacementMessage,
+      return CustomSafeArea(
+        SmartRefresher(
+          enablePullUp: true,
+          onRefresh: _onRefresh,
+          child: ModalProgressHUD(
+            inAsyncCall: groupViewModel.isBusy,
+            progressIndicator: SpinWidget(),
+            child: Padding(
+              padding: const EdgeInsets.all(smallPadding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  HomeBarWidget(),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Visibility(
+                          visible: groupViewModel.listOfGroups.isNotEmpty,
+                          replacement: Padding(
+                            padding: const EdgeInsets.all(smallPadding),
+                            child: Text(
+                              replacementMessage,
+                            ),
                           ),
-                        ),
-                        child: Expanded(
-                          child: Container(
-                            child: GridView.count(
-                              crossAxisCount: 2,
-                              children: List.generate(
-                                  groupViewModel.listOfGroups.length, (index) {
-                                Group group =
-                                    groupViewModel.listOfGroups[index];
-                                return GroupWidget(
-                                    onTap: () {
-                                      navigateToLightsPage(group.lights);
-                                    },
-                                    onToggle: () async {
-                                      return await groupViewModel.updateGroup(
-                                        group,
-                                        group.state.anyOn,
-                                        onSuccess: updateScreen,
-                                        onFail: onFailUpdateGroup,
-                                      );
-                                    },
-                                    group: groupViewModel.listOfGroups[index]);
-                              }),
+                          child: Expanded(
+                            child: Container(
+                              child: GridView.count(
+                                crossAxisCount: 2,
+                                children: List.generate(
+                                    groupViewModel.listOfGroups.length,
+                                    (index) {
+                                  Group group =
+                                      groupViewModel.listOfGroups[index];
+                                  return GroupWidget(
+                                      onTap: () {
+                                        navigateToLightsPage(group.lights);
+                                      },
+                                      onToggle: () async {
+                                        return await groupViewModel.updateGroup(
+                                          group,
+                                          group.state.anyOn,
+                                          onSuccess: updateScreen,
+                                          onFail: onFailUpdateGroup,
+                                        );
+                                      },
+                                      group:
+                                          groupViewModel.listOfGroups[index]);
+                                }),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
-            controller: _refreshController,
           ),
+          controller: _refreshController,
         ),
       );
     });

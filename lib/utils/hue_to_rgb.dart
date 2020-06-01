@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:lyghts/constants/constants_styles.dart';
 import 'package:lyghts/models/group/group.dart';
 import 'package:lyghts/models/light/light.dart';
 import 'package:lyghts/models/rgb.dart';

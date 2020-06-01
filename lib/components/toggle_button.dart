@@ -16,8 +16,7 @@ class _ToggleButtonState extends State<ToggleButton> {
     onChanged(bool value) async {
       bool newBool = await widget.onToggle();
       widget.group.state.anyOn = newBool;
-      setState(() {
-      });
+      setState(() {});
     }
 
     return CupertinoSwitch(

@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lyghts/components/custom_safe_area.dart';
 import 'package:lyghts/constants/constants_labels.dart';
 import 'package:lyghts/constants/constants_styles.dart';
+import 'package:lyghts/screens/groups/view_model/group_view_model.dart';
 import 'package:lyghts/screens/lights/components/highlight_widget.dart';
 import 'package:lyghts/screens/lights/components/light_controller.dart';
 import 'package:lyghts/screens/lights/components/light_widget.dart';
@@ -19,6 +21,11 @@ class LightsScreen extends StatefulWidget {
 class _LightsScreenState extends State<LightsScreen> {
   @override
   Widget build(BuildContext context) {
+    navigateAndReload() {
+      Navigator.pop(context);
+      Provider.of<GroupViewModel>(context, listen: true).getListOfGroups();
+    }
+
     return Consumer<LightViewModel>(builder: (context, viewModel, child) {
       changeSelected(int i) {
         viewModel.changeSelected(i);
@@ -32,12 +39,23 @@ class _LightsScreenState extends State<LightsScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(mediumPadding),
-                    child: Text(
-                      LIGHT_SCREEN,
-                      style: SCREEN_TITLE,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(mediumPadding),
+                        child: Text(
+                          LIGHT_SCREEN,
+                          style: SCREEN_TITLE,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: navigateAndReload,
+                        icon: Icon(
+                          Icons.arrow_back,
+                        ),
+                      ),
+                    ],
                   ),
 //                  InkWell(
 //                    onTap: () => viewModel.updateLight(
@@ -92,14 +110,17 @@ class _LightsScreenState extends State<LightsScreen> {
           );
         } else {
           return Center(
-            child: Text("No Lights"),
+            child: Text(NO_LIGHTS),
           );
         }
       }
 
-      return SafeArea(
-        child: Scaffold(
-          body: getLights(),
+      return WillPopScope(
+        onWillPop: () async {
+          return false;
+        },
+        child: CustomSafeArea(
+          getLights(),
         ),
       );
     });

@@ -15,13 +15,13 @@ class _$LightService extends LightService {
   final definitionType = LightService;
 
   Future<Response<dynamic>> getLightById(int id) {
-    final $url = '/${id}';
+    final $url = '/$id';
     final $request = Request('GET', $url, client.baseUrl);
     return client.send<dynamic, dynamic>($request);
   }
 
   Future<Response<dynamic>> updateLightById(int id, Map<dynamic, dynamic> map) {
-    final $url = '/${id}/state';
+    final $url = '/$id/state';
     final $body = map;
     final $request = Request('PUT', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request);

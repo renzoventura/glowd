@@ -1,10 +1,9 @@
 import 'package:chopper/chopper.dart';
 import 'package:lyghts/models/group/group.dart';
-import 'package:lyghts/models/light/light.dart';
 import 'package:lyghts/services/group/group_service.dart';
 import 'package:lyghts/services/light/light_service.dart';
 import 'package:lyghts/services/lists/list_group_lights_service.dart';
-import 'package:lyghts/utils/BaseViewModel.dart';
+import 'package:lyghts/utils/base_view_model.dart';
 import 'package:lyghts/utils/dependency_assembly.dart';
 
 class GroupViewModel extends BaseViewModel {
@@ -65,6 +64,4 @@ class GroupViewModel extends BaseViewModel {
     setIdle();
     return !currentState;
   }
-
-
 }

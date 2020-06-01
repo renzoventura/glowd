@@ -1,5 +1,3 @@
-
-
 import 'package:lyghts/models/group/group.dart';
 
 Group mockGroup = Group.fromJson(mockGroupJson1);
@@ -117,7 +115,6 @@ dynamic mockListOfGroups5 = {
     "action": {"on": true, "bri": 254, "alert": "select"}
   }
 };
-
 
 dynamic mockListOfGroups1 = {
   "1": {

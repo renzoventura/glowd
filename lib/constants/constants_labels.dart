@@ -1,7 +1,7 @@
 const String STATUS_LABEL = "Status:";
 const String NUMBER_OF_LIGHTS_LABEL = "# of lights:";
 const String BRIGHTNESS_LEVEL_LABEL = "Brightness:";
-const String YOUR_ROOMS_TITLE = "YOUR ROOMS";
+const String YOUR_ROOMS_TITLE = "Rooms Screen";
 const String PULL_SCREEN_DOWN_DIALOG = "Pull screen down to load your rooms.";
 const String PERCENT = "%";
 const String NO_ROOMS = "No Rooms available";
@@ -19,3 +19,4 @@ const String G = "G";
 const String B = "B";
 const String LIGHT_SCREEN = "Lights Screen";
 const String UPDATE = "UPDATE";
+const String NO_LIGHTS = "No Lights";

@@ -15,7 +15,7 @@ class _$GroupService extends GroupService {
   final definitionType = GroupService;
 
   Future<Response<Group>> getGroupsById(int id) {
-    final $url = '/${id}';
+    final $url = '/$id';
     final $request = Request('GET', $url, client.baseUrl);
     return client.send<Group, Group>($request);
   }

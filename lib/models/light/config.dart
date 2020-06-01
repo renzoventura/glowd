@@ -12,7 +12,8 @@ class Config {
     archetype = json['archetype'];
     function = json['function'];
     direction = json['direction'];
-    startup = json['startup'] != null ? new Startup.fromJson(json['startup']) : null;
+    startup =
+        json['startup'] != null ? new Startup.fromJson(json['startup']) : null;
   }
 
   Map<String, dynamic> toJson() {

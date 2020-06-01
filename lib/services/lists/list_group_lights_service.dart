@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:chopper/chopper.dart';
 import 'package:lyghts/global.dart';
-
 
 part 'list_group_lights_service.chopper.dart';
 

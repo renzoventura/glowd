@@ -7,7 +7,6 @@ import 'package:lyghts/screens/lights/components/slider_title.dart';
 import 'package:lyghts/utils/hue_to_rgb.dart';
 import 'package:lyghts/utils/rgb_to_hue.dart';
 import 'package:lyghts/utils/utils.dart';
-import 'package:provider/provider.dart';
 
 class LightController extends StatefulWidget {
   final Light.Light light;
@@ -40,7 +39,7 @@ class _LightControllerState extends State<LightController> {
         style: TextStyle(color: textColor),
       ),
       SizedBox(
-        height: 30,
+        height: boxHeight,
       ),
       SliderTitle(
         title: BRIGHTNESS,
@@ -130,7 +129,7 @@ class _LightControllerState extends State<LightController> {
                     width: smallBorderWidth,
                   ),
                   borderRadius: BorderRadius.all(
-                    Radius.circular(30.0),
+                    Radius.circular(radiusCircular),
                   ),
                 ),
                 child: Text(

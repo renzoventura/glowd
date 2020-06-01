@@ -2,7 +2,7 @@ import 'package:chopper/chopper.dart';
 import 'package:lyghts/models/light/light.dart';
 import 'package:lyghts/models/request_body/state_dto.dart';
 import 'package:lyghts/services/light/light_service.dart';
-import 'package:lyghts/utils/BaseViewModel.dart';
+import 'package:lyghts/utils/base_view_model.dart';
 import 'package:lyghts/utils/dependency_assembly.dart';
 import 'package:lyghts/extentions/double_extention.dart';
 
@@ -54,17 +54,14 @@ class LightViewModel extends BaseViewModel {
   updateLight(Light light) async {
     setBusy();
     try {
-      print(light.id);
       StateDTO state = StateDTO(on: light.state.on, bri: light.state.bri);
       if (light.state.xy != null && light.state.xy.isNotEmpty)
         state.setXY(light.state.xy.map((f) => f.roundToTwoDecimal()).toList());
-      print(state.toJson().toString());
       Response resp = await lightService.updateLightById(
         light.id,
         state.toJson(),
       );
       if (resp.isSuccessful) {
-        print(resp.body.toString());
 //        getLightsByGroup(currentLightIds);
       } else {}
     } catch (e) {}

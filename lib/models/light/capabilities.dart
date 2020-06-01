@@ -11,8 +11,11 @@ class Capabilities {
 
   Capabilities.fromJson(Map<String, dynamic> json) {
     certified = json['certified'];
-    control = json['control'] != null ? new Control.fromJson(json['control']) : null;
-    streaming = json['streaming'] != null ? new Streaming.fromJson(json['streaming']) : null;
+    control =
+        json['control'] != null ? new Control.fromJson(json['control']) : null;
+    streaming = json['streaming'] != null
+        ? new Streaming.fromJson(json['streaming'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {

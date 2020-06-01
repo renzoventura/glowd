@@ -8,7 +8,6 @@ class HighlightWidget extends StatelessWidget {
   HighlightWidget({@required this.child, @required this.isSelected});
   @override
   Widget build(BuildContext context) {
-
     getColor() => isSelected ? Colors.white : Colors.transparent;
     return Padding(
       padding: const EdgeInsets.all(smallPadding),

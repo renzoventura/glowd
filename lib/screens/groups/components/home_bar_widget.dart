@@ -5,17 +5,27 @@ import 'package:lyghts/constants/constants_styles.dart';
 class HomeBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(mediumPadding),
           child: Text(
             YOUR_ROOMS_TITLE,
-            style: TextStyle(fontSize: largeFontSize),
+            style: SCREEN_TITLE,
           ),
         ),
-        Text(PULL_TO_REFRESH),
-        Icon(Icons.arrow_downward),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Icon(Icons.keyboard_arrow_down),
+            Text(
+              PULL_TO_REFRESH,
+              style: HEADER_TEXT_STYLE,
+            ),
+          ],
+        ),
       ],
     );
   }

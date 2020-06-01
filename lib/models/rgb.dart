@@ -10,5 +10,4 @@ class RGB {
   void setB(double newValue) => b = newValue;
 
   bool isValidRGB() => (r != null && g != null && b != null);
-
 }
